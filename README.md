@@ -33,7 +33,7 @@ The full-stack application is now fully functional with frontend-backend integra
 ### Prerequisites
 - Node.js (v16 or higher)
 - npm or yarn
-- OpenAI API key
+- API key from OpenAI
 
 ### Setup Instructions
 
