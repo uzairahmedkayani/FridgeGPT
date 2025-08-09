@@ -4,14 +4,14 @@ Tell me what's in your fridge, and I'll make it gourmet.
 
 ## 🚀 Current Status: Recipe Generation Working
 
-The full-stack application is now fully functional with frontend-backend integration and Gemini AI-powered recipe generation!
+The full-stack application is now fully functional with frontend-backend integration and OpenAI-powered recipe generation!
 
 ### ✅ What's Working:
 - **Full-Stack Integration**: Frontend (React + Vite) connected to Backend (Express.js)
 - **Recipe Generation**: Complete workflow from ingredient input to AI-generated recipes
 - **Backend Server**: Express.js server running on port 5000 with CORS enabled
 - **Frontend Interface**: Modern React UI with form handling, loading states, and error management
-- **Gemini AI Integration**: Recipe generation using Google's Gemini 1.5 Flash model
+- **OpenAI Integration**: Recipe generation using OpenAI's GPT model
 - **API Endpoint**: `POST /api/generate` accepts ingredients and returns recipes
 - **Development Scripts**: Easy startup scripts for both Windows batch and PowerShell
 - **ES Modules**: All code converted to modern ES module syntax
@@ -33,7 +33,7 @@ The full-stack application is now fully functional with frontend-backend integra
 ### Prerequisites
 - Node.js (v16 or higher)
 - npm or yarn
-- Google Gemini API key
+- OpenAI API key
 
 ### Setup Instructions
 
@@ -51,7 +51,7 @@ The full-stack application is now fully functional with frontend-backend integra
 2. **Configure Environment Variables**
    ```bash
    # In backend/.env file
-   GEMINI_API_KEY=your_gemini_api_key_here
+   OPENAI_API_KEY=your_openai_api_key_here
    ```
 
 3. **Start Development Servers**
@@ -90,5 +90,5 @@ The full-stack application is now fully functional with frontend-backend integra
 
 - **Frontend**: React 19, Vite, TailwindCSS
 - **Backend**: Express.js, Node.js
-- **AI**: Google Gemini 1.5 Flash
+- **AI**: OpenAI GPT
 - **Development**: Hot reload, CORS enabled, ES modules
