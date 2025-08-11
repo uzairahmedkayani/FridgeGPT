@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import Navbar from "../components/Navbar";
 import { generateRecipe } from "../services/api";
+import TurnedInNotIcon from '@mui/icons-material/TurnedInNot';
+import TurnedInIcon from '@mui/icons-material/TurnedIn';
 
 export default function Main() {
   const [ingredients, setIngredients] = useState("");
@@ -12,7 +14,7 @@ export default function Main() {
     e.preventDefault();
     
     if (!ingredients.trim()) {
-      setError("Please enter some ingredients");
+      setError("Please enter a few ingredients");
       return;
     }
 
@@ -34,6 +36,13 @@ export default function Main() {
     }
   };
 
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      handleSubmit(e);
+    }
+  };
+
   return (
     <div>
       <Navbar />
@@ -45,6 +54,7 @@ export default function Main() {
             placeholder="Enter ingredients, separated by commas..."
             value={ingredients}
             onChange={(e) => setIngredients(e.target.value)}
+            onKeyDown={handleKeyDown}
             disabled={loading}
           />
           <button 
@@ -57,14 +67,24 @@ export default function Main() {
         </form>
 
         {error && (
-          <div className="w-full max-w-md p-3 bg-red-600 text-white rounded-md">
+          <div className="w-full max-w-md mt-0.5 text-red-600">
             {error}
           </div>
         )}
 
         {recipe && (
           <div className="w-full max-w-2xl p-6 bg-gray-700 text-white rounded-md">
-            <h2 className="text-xl font-bold mb-4">Generated Recipe</h2>
+            <div className="flex items-center justify-between mb-4">
+              <h2 className="text-xl font-bold">Generated Recipe</h2>
+              <button
+                type="button"
+                className="text-blue-200 hover:text-blue-500 cursor-pointer"
+                title="Save recipe"
+                // onClick={handleSaveRecipe} // To be implemented later
+              >
+                <TurnedInNotIcon />
+              </button>
+            </div>
             <div className="whitespace-pre-wrap">{recipe}</div>
           </div>
         )}
