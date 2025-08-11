@@ -33,7 +33,7 @@ The full-stack application is now fully functional with frontend-backend integra
 ### Prerequisites
 - Node.js (v16 or higher)
 - npm or yarn
-- API key from OpenAI
+- API key from Gemini
 
 ### Setup Instructions
 
@@ -90,5 +90,5 @@ The full-stack application is now fully functional with frontend-backend integra
 
 - **Frontend**: React 19, Vite, TailwindCSS
 - **Backend**: Express.js, Node.js
-- **AI**: OpenAI GPT
+- **AI**: Gemini AI
 - **Development**: Hot reload, CORS enabled, ES modules
