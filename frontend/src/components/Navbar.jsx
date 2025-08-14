@@ -1,9 +1,11 @@
 import React, { useState } from 'react'
 import LogoFull from '../assets/LogoFull.svg?react'
 import MenuIcon from '@mui/icons-material/Menu';
+import { useAuth } from '../context/AuthContext';
 
 export default function Navbar() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const { user, logout } = useAuth();
 
     return (
         <nav className="w-full flex items-center justify-between px-6 py-4 bg-gray-900 shadow-md">
@@ -38,7 +40,10 @@ export default function Navbar() {
                                 Saved Recipes
                             </a>
                             <button
-                                onClick={() => {/* Add logout logic here */}}
+                                onClick={() => {
+                                    logout();
+                                    setIsMenuOpen(false);
+                                }}
                                 className="block w-full text-left px-4 py-2 text-md text-gray-700 hover:bg-gray-100 cursor-pointer"
                             >
                                 Logout

@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import LogoFull from '../assets/LogoFull.svg?react';
-import { login } from '../services/auth';
+import { login as loginService } from '../services/auth';
+import { useAuth } from '../context/AuthContext';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 
@@ -13,7 +14,15 @@ export default function Login() {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
     const navigate = useNavigate();
+    const { login, user } = useAuth();
     const [showPassword, setShowPassword] = useState(false);
+
+    // Redirect if already logged in
+    React.useEffect(() => {
+        if (user) {
+            navigate('/home');
+        }
+    }, [user, navigate]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -21,8 +30,9 @@ export default function Login() {
         setError('');
 
         try {
-            const response = await login(formData);
+            const response = await loginService(formData);
             if (response.success) {
+                login(response.user);
                 navigate('/home');
             } else if (response?.message) {
                 setError(response.message);

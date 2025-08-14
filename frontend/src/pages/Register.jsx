@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import LogoFull from '../assets/LogoFull.svg?react';
-import { register } from '../services/auth';
+import { register as registerService } from '../services/auth';
+import { useAuth } from '../context/AuthContext';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 
@@ -15,8 +16,16 @@ export default function Register() {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
     const navigate = useNavigate();
+    const { login, user } = useAuth();
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
+    // Redirect if already logged in
+    React.useEffect(() => {
+        if (user) {
+            navigate('/home');
+        }
+    }, [user, navigate]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -30,9 +39,10 @@ export default function Register() {
         }
 
         try {
-            const response = await register(formData);
+            const response = await registerService(formData);
             if (response.success) {
-                navigate('/login');
+                login(response.user);
+                navigate('/home');
             }
         } catch (err) {
             setError(typeof err === 'string' ? err : (err?.message || 'Registration failed. Please try again.'));

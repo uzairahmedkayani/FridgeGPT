@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Navbar from "../components/Navbar";
 import { generateRecipe } from "../services/api";
+import { useAuth } from "../context/AuthContext";
 import TurnedInNotIcon from '@mui/icons-material/TurnedInNot';
 import TurnedInIcon from '@mui/icons-material/TurnedIn';
 
@@ -9,6 +10,7 @@ export default function Main() {
   const [recipe, setRecipe] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const { user } = useAuth();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -47,6 +49,16 @@ export default function Main() {
     <div>
       <Navbar />
       <div className="flex flex-col items-center space-y-4 w-full py-10 bg-gray-800 min-h-screen">
+        {user && (
+          <div className="w-full max-w-md text-center mb-4">
+            <h1 className="text-2xl font-bold text-white mb-2">
+              Welcome back, {user.name}! 👋
+            </h1>
+            <p className="text-gray-300">
+              Ready to create something delicious?
+            </p>
+          </div>
+        )}
         <form onSubmit={handleSubmit} className="w-full max-w-md space-y-4">
           <textarea
             className="w-full p-3 border text-white bg-gray-700 border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
