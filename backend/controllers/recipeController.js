@@ -16,6 +16,12 @@ const generateRecipe = async (req, res) => {
   Focus on building a cohesive and delicious dish using the most suitable items from the list. Provide a clear recipe name, a complete list of used ingredients, and step-by-step cooking instructions that are easy to follow for home cooks. Only in case you notice any ingredient or ingredients that don't naturally fit into the main recipe, mention them at the end only, without disrupting the recipe flow. Briefly explain why they might be less suitable for this particular dish, and suggest a practical way they could be used separately—such as in a sauce, dip, drink, or side item that complements the main recipe. Furthermore if the user adds all items which are inedible (such as a window, it's never eaten), just reply with 'SYBAU'. If all the ingredients fit well, there's no need to mention ANYTHING EXTRA, just present the recipe.`;
 
   try {
+    if (!process.env.GEMINI_API_KEY) {
+      return res.status(500).json({
+        success: false,
+        message: 'Server is missing GEMINI_API_KEY. Please configure the API key.'
+      });
+    }
     const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
     const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
 

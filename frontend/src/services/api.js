@@ -1,23 +1,19 @@
-const API_BASE_URL = 'http://localhost:5000/api';
+import apiClient from './api-client';
 
 export const generateRecipe = async (ingredients) => {
-  try {
-    const response = await fetch(`${API_BASE_URL}/generate`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ ingredients }),
-    });
-
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
+    try {
+        const { data } = await apiClient.post('/recipe/generate', { ingredients });
+        return data;
+    } catch (error) {
+        throw error.response?.data?.message || 'Failed to generate recipe';
     }
+};
 
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    console.error('Error generating recipe:', error);
-    throw error;
-  }
-}; 
+export const saveRecipe = async (recipe) => {
+    try {
+        const { data } = await apiClient.post('/recipe/save', recipe);
+        return data;
+    } catch (error) {
+        throw error.response?.data?.message || 'Failed to save recipe';
+    }
+};
