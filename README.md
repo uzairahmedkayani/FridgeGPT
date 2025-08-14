@@ -23,8 +23,8 @@ The full-stack application is now fully functional with frontend-backend integra
 | Phase       | Features                                                                     | Status |
 | ----------- | ---------------------------------------------------------------------------- | ------ |
 | **Phase 1** | Input ingredients → Generate recipe text (no login, use default prompt)      | ✅ **COMPLETE** |
-| **Phase 2** | Add basic dietary options (from dropdown)                                    | 🔄 Next |
-| **Phase 3** | User auth (Firebase or JWT), save recipe history, fetch personalized recipes | ⏳ Pending |
+| **Phase 2** | User auth (Firebase or JWT), save recipe history, fetch personalized recipes | 🔄 Next |
+| **Phase 3** | Add basic dietary options (from dropdown or saved in profile)                | ⏳ Pending |
 | **Phase 4** | Polish UI, optimize prompt engineering, handle edge cases                    | ⏳ Pending |
 
 ## 🛠️ Quick Start
