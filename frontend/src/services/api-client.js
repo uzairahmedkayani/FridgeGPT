@@ -8,16 +8,42 @@ const apiClient = axios.create({
     },
 });
 
-// Add a request interceptor to attach the auth token
+// Add a request interceptor to attach the auth token if it exists in localStorage
 apiClient.interceptors.request.use(
     (config) => {
         const token = localStorage.getItem('token');
         if (token) {
-            config.headers.Authorization = `Bearer ${token}`;
+            config.headers['Authorization'] = `Bearer ${token}`;
         }
+        console.log('API Request:', {
+            method: config.method,
+            url: config.url,
+            data: config.data,
+            headers: config.headers
+        });
         return config;
     },
     (error) => {
+        console.error('API Request Error:', error);
+        return Promise.reject(error);
+    }
+);
+
+// Add a response interceptor for logging
+apiClient.interceptors.response.use(
+    (response) => {
+        console.log('API Response:', {
+            status: response.status,
+            data: response.data
+        });
+        return response;
+    },
+    (error) => {
+        console.error('API Response Error:', {
+            status: error.response?.status,
+            data: error.response?.data,
+            message: error.message
+        });
         return Promise.reject(error);
     }
 );

@@ -2,7 +2,7 @@
 
 Tell me what's in your fridge, and I'll make it gourmet.
 
-## 🚀 Current Status: Recipe Generation Working
+## 🚀 Current Status: User Registration, Recipe Generation and Saving Recipes Working
 
 The full-stack application is now fully functional with frontend-backend integration and GeminiAI-powered recipe generation!
 
@@ -23,8 +23,8 @@ The full-stack application is now fully functional with frontend-backend integra
 | Phase       | Features                                                                     | Status |
 | ----------- | ---------------------------------------------------------------------------- | ------ |
 | **Phase 1** | Input ingredients → Generate recipe text (no login, use default prompt)      | ✅ **COMPLETE** |
-| **Phase 2** | User auth (Firebase or JWT), save recipe history, fetch personalized recipes | 🔄 Next |
-| **Phase 3** | Add basic dietary options (from dropdown or saved in profile)                | ⏳ Pending |
+| **Phase 2** | User auth (Firebase or JWT), save recipes, fetch saved recipes               | ✅ **COMPLETE** |
+| **Phase 3** | Add basic dietary options (from dropdown or saved in profile)                | 🔄 Next |
 | **Phase 4** | Polish UI, optimize prompt engineering, handle edge cases                    | ⏳ Pending |
 
 ## 🛠️ Quick Start

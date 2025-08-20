@@ -8,7 +8,7 @@ const auth = async (req, res, next) => {
         const user = await User.findById(decoded.id);
 
         if (!user) {
-            throw new Error();
+            throw new Error('User not found');
         }
 
         req.user = user;
@@ -18,4 +18,4 @@ const auth = async (req, res, next) => {
     }
 };
 
-export default auth;
+export { auth };

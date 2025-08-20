@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Navbar from "../components/Navbar";
-import { generateRecipe } from "../services/api";
+import { generateRecipe, saveRecipe } from "../services/api";
 import { useAuth } from "../context/AuthContext";
 import TurnedInNotIcon from '@mui/icons-material/TurnedInNot';
 import TurnedInIcon from '@mui/icons-material/TurnedIn';
@@ -10,6 +10,8 @@ export default function Main() {
   const [recipe, setRecipe] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [message, setMessage] = useState("");
+  const [isSaved, setIsSaved] = useState(false);
   const { user } = useAuth();
 
   const handleSubmit = async (e) => {
@@ -23,6 +25,8 @@ export default function Main() {
     setLoading(true);
     setError("");
     setRecipe("");
+    setMessage("");
+    setIsSaved(false);
 
     try {
       const response = await generateRecipe(ingredients);
@@ -42,6 +46,22 @@ export default function Main() {
     if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault();
       handleSubmit(e);
+    }
+  };
+
+  const handleSaveRecipe = async () => {
+    try {
+      const response = await saveRecipe(recipe);
+      if (response.success) {
+        setMessage("Recipe saved successfully!");
+        setIsSaved(true);
+        console.log("Recipe saved successfully");
+      } else {
+        setError(response.message || "Failed to save recipe");
+        console.log("Failed to save recipe");
+      }
+    } catch (err) {
+      setError("Failed to connect to the server. Please try again.");
     }
   };
 
@@ -84,17 +104,24 @@ export default function Main() {
           </div>
         )}
 
+        {message && (
+          <div className="w-full max-w-md mt-0.5 text-green-600">
+            {message}
+          </div>
+        )}
+
         {recipe && (
           <div className="w-full max-w-2xl p-6 bg-gray-700 text-white rounded-md">
             <div className="flex items-center justify-between mb-4">
               <h2 className="text-xl font-bold">Generated Recipe</h2>
               <button
                 type="button"
-                className="text-blue-200 hover:text-blue-500 cursor-pointer"
-                title="Save recipe"
-                // onClick={handleSaveRecipe} // To be implemented later
+                className={`cursor-pointer ${isSaved ? 'text-green-400' : 'text-blue-200 hover:text-blue-500'}`}
+                title={isSaved ? "Recipe saved" : "Save recipe"}
+                onClick={handleSaveRecipe}
+                disabled={isSaved}
               >
-                <TurnedInNotIcon />
+                {isSaved ? <TurnedInIcon /> : <TurnedInNotIcon />}
               </button>
             </div>
             <div className="whitespace-pre-wrap">{recipe}</div>
