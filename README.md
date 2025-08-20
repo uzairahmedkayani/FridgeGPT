@@ -13,7 +13,6 @@ The full-stack application is now fully functional with frontend-backend integra
 - **Frontend Interface**: Modern React UI with form handling, loading states, and error management
 - **GeminiAI Integration**: Recipe generation using Gemini's GPT model
 - **API Endpoint**: `POST /api/generate` accepts ingredients and returns recipes
-- **Development Scripts**: Easy startup scripts for both Windows batch and PowerShell
 - **ES Modules**: All code converted to modern ES module syntax
 - **Environment Variables**: Secure API key management with `.env` file
 
@@ -54,17 +53,7 @@ The full-stack application is now fully functional with frontend-backend integra
    ```
 
 3. **Start Development Servers**
-   
-   **Option A: Use the provided scripts**
-   ```bash
-   # Windows (double-click or run in terminal)
-   start-dev.bat
-   
-   # Or PowerShell
-   .\start-dev.ps1
-   ```
-   
-   **Option B: Manual startup**
+   **Manual startup**
    ```bash
    # Terminal 1 - Backend
    cd backend
@@ -80,10 +69,11 @@ The full-stack application is now fully functional with frontend-backend integra
    - Backend API: http://localhost:5000
 
 ### Usage
-1. Open the application in your browser
-2. Enter ingredients separated by commas (e.g., "chicken, rice, vegetables")
-3. Click "Generate Recipe"
-4. View your AI-generated recipe!
+1. Open the app in your browser.
+2. Register if you haven't already.
+3. Type your available ingredients, separated by commas (e.g., "chicken, rice, vegetables").
+4. Click the "Generate Recipe" button.
+5. Review or save your personalized AI-generated recipe.
 
 ## 🔧 Technical Stack
 
